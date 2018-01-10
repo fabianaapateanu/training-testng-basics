@@ -1,6 +1,6 @@
 package training;
 
-public class SetupOfTestNgHelper {
+public class LoginUserHelper {
 
     public static String readValidUsername() {
         return "yeseniaworld@gmail.com";

@@ -1,56 +1,52 @@
-package basic;
+package dataprovider;
 
 import common.CustomDriver;
 import common.CustomLogger;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import training.LoginUserHelper;
-import training.basic.HomePage;
 import training.basic.LoginPage;
+import training.basic.dataprovider.User;
 
-public class ExceptionTestExample {
-
-    private static String username;
-    private static String password;
-
+public class DataProviderObjectTests {
     private CustomDriver myDriver;
-
     private static Logger LOG;
 
-    @BeforeClass
+    @DataProvider(name = "invalid_user_data")
+    public Object[][] parameterProvider() {
+        return new Object[][]{{new User("yeseniaworld@gmail.com", "test12345")},
+                {new User("invalidUser@yahoo", "invalidPass")}};
+    }
+
+    @BeforeClass()
     public static void runBeforeClassInit() {
-        LOG = CustomLogger.getInstance(ExceptionTestExample.class).getLogger();
+        LOG = CustomLogger.getInstance(DataProviderObjectTests.class).getLogger();
         LOG.info("Running setup before class test methods initialization");
     }
 
-    @AfterClass
+    @AfterClass()
     public static void runAfterClassFinished() {
         LOG.info("Running teardown after class test methods run finished");
     }
 
-    @BeforeMethod
+    @BeforeMethod()
     public void runBeforeEachTestMethod() {
         LOG.info("Running setup before each test method");
-
-        username = LoginUserHelper.readValidUsername();
-        password = LoginUserHelper.readValidPassword();
-
         myDriver = CustomDriver.getInstance();
     }
 
-    @AfterMethod
+    @AfterMethod()
     public void runAfterEachTestMethod() {
         LOG.info("Running teardown before each test method");
         myDriver.closeDriver();
     }
 
-    @Test(expectedExceptions = {NoSuchElementException.class})
-    public void loginWithValidUserAndNoLoginForm() {
+    @Test(dataProvider = "invalid_user_data")
+    public void loginWithInvalidUser(User testUser) {
         LoginPage loginPage = new LoginPage(myDriver.getDriver());
-        HomePage homePage = loginPage.performLogin(username, password);
-        Assert.assertFalse(loginPage.isLoginFormisplayed(), "Login form is still displayed");
+        loginPage.fillUsername(testUser.getUsername());
+        loginPage.fillPassword(testUser.getPassword());
+        loginPage.clickLogin();
+        Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Some failure log");
     }
-
 }

@@ -5,7 +5,7 @@ import common.CustomLogger;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import training.SetupOfTestNgHelper;
+import training.LoginUserHelper;
 import training.basic.HomePage;
 import training.basic.LoginPage;
 
@@ -38,8 +38,8 @@ public class SetupOfTestNgExample {
     public void runBeforeEachGroupPositive() {
         LOG.info("Running setup before group positive_tests initialization");
         //read valid login data
-        username = SetupOfTestNgHelper.readValidUsername();
-        password = SetupOfTestNgHelper.readValidPassword();
+        username = LoginUserHelper.readValidUsername();
+        password = LoginUserHelper.readValidPassword();
     }
 
     @AfterGroups("positive_tests")
@@ -51,8 +51,8 @@ public class SetupOfTestNgExample {
     public void runBeforeEachGroupNegative() {
         LOG.info("Running setup before group negative_test initialization");
         //read invalid login data
-        username = SetupOfTestNgHelper.readInvalidUsername();
-        password = SetupOfTestNgHelper.readInvalidPassword();
+        username = LoginUserHelper.readInvalidUsername();
+        password = LoginUserHelper.readInvalidPassword();
     }
 
     @AfterGroups("negative_tests")

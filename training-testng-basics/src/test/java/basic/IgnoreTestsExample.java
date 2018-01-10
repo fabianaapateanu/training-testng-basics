@@ -5,7 +5,7 @@ import common.CustomLogger;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import training.SetupOfTestNgHelper;
+import training.LoginUserHelper;
 import training.basic.HomePage;
 import training.basic.LoginPage;
 
@@ -33,8 +33,8 @@ public class IgnoreTestsExample {
     public void runBeforeEachTestMethod() {
         LOG.info("Running setup before each test method");
 
-        username = SetupOfTestNgHelper.readValidUsername();
-        password = SetupOfTestNgHelper.readValidPassword();
+        username = LoginUserHelper.readValidUsername();
+        password = LoginUserHelper.readValidPassword();
 
         myDriver = CustomDriver.getInstance();
     }

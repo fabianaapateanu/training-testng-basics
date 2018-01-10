@@ -5,24 +5,33 @@ import common.CustomLogger;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import training.SetupOfTestNgHelper;
+import training.LoginUserHelper;
 import training.basic.HomePage;
 import training.basic.LoginPage;
 
-public class SearchFunctionalityTests {
-
+public class DataProviderPrimitiveTests {
     private static String username;
     private static String password;
-
-    private String searchQuery;
+    private HomePage homePage;
 
     private CustomDriver myDriver;
-
     private static Logger LOG;
+
+    @DataProvider(name = "valid_search_data")
+    public static Object[] validSearchData() {
+        Object[] data = new Object[]{"appium", "webdriver", "testng"};
+        return data;
+    }
+
+    @DataProvider(name = "invalid_search_data")
+    public static Object[] invalidSearchData() {
+        Object[] data = new Object[]{"poooooooop", "loooooooop", "zooooooooz"};
+        return data;
+    }
 
     @BeforeClass(groups = {"positive_tests", "negative_tests"})
     public static void runBeforeClassInit() {
-        LOG = CustomLogger.getInstance(SearchFunctionalityTests.class).getLogger();
+        LOG = CustomLogger.getInstance(DataProviderPrimitiveTests.class).getLogger();
         LOG.info("Running setup before class test methods initialization");
     }
 
@@ -34,11 +43,11 @@ public class SearchFunctionalityTests {
     @BeforeMethod(groups = {"positive_tests", "negative_tests"})
     public void runBeforeEachTestMethod() {
         LOG.info("Running setup before each test method");
-
-        username = SetupOfTestNgHelper.readValidUsername();
-        password = SetupOfTestNgHelper.readValidPassword();
-
+        username = LoginUserHelper.readValidUsername();
+        password = LoginUserHelper.readValidPassword();
         myDriver = CustomDriver.getInstance();
+        LoginPage loginPage = new LoginPage(myDriver.getDriver());
+        homePage = loginPage.performLogin(username, password);
     }
 
     @AfterMethod(groups = {"positive_tests", "negative_tests"})
@@ -47,28 +56,19 @@ public class SearchFunctionalityTests {
         myDriver.closeDriver();
     }
 
-    @Test(groups = "positive_tests")
-    public void loginAndSearchMultipleResults() {
-        LoginPage loginPage = new LoginPage(myDriver.getDriver());
-        HomePage homePage = loginPage.performLogin(username, password);
+    @Test(groups = "positive_tests", dataProvider = "valid_search_data")
+    public void loginAndSearchMultipleResults(String searchQuery) {
         Assert.assertTrue(homePage.isSearchAreaDisplayed(), "The search area is not displayed");
-
-        searchQuery = "appium";
-
         homePage.performSearch(searchQuery);
+
         Assert.assertTrue(homePage.isRepositorySearchResultListDisplayed(), "The search action did not return multiple results");
     }
 
-    @Test(groups = "negative_tests")
-    public void loginAndSearchNoResults() {
-        LoginPage loginPage = new LoginPage(myDriver.getDriver());
-        HomePage homePage = loginPage.performLogin(username, password);
+    @Test(groups = "negative_tests", dataProvider = "invalid_search_data")
+    public void loginAndSearchNoResults(String searchQuery) {
         Assert.assertTrue(homePage.isSearchAreaDisplayed(), "The search area is not displayed");
-
-        searchQuery = "poooooooop";
-
         homePage.performSearch(searchQuery);
-        Assert.assertFalse(homePage.isRepositorySearchResultListDisplayed(), "The search action returned results");
+
         Assert.assertTrue(homePage.isEmptyResultDisplayed(), "The empty results container is not displayed");
     }
 }
