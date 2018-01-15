@@ -5,17 +5,23 @@ import common.CustomLogger;
 import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import training.basic.LoginPage;
 import training.basic.dataprovider.User;
+import training.basic.pageObject.LoginPage;
 
+/**
+ * DataProvider can be used with your own defined objects.
+ * {main/java/training/basic/dataprovider/User.java} is used in this example for login test data.
+ *
+ * @author fapateanu
+ */
 public class DataProviderObjectTests {
     private CustomDriver myDriver;
     private static Logger LOG;
 
     @DataProvider(name = "invalid_user_data")
-    public Object[][] parameterProvider() {
-        return new Object[][]{{new User("yeseniaworld@gmail.com", "test12345")},
-                {new User("invalidUser@yahoo", "invalidPass")}};
+    public Object[] loginInvalidProvider() {
+        return new Object[]{new User("yeseniaworld@gmail.com", "test12345"),
+                new User("invalidUser@yahoo", "invalidPass")};
     }
 
     @BeforeClass()
@@ -41,7 +47,7 @@ public class DataProviderObjectTests {
         myDriver.closeDriver();
     }
 
-    @Test(dataProvider = "invalid_user_data")
+    @Test(dataProvider = "loginInvalidProvider")
     public void loginWithInvalidUser(User testUser) {
         LoginPage loginPage = new LoginPage(myDriver.getDriver());
         loginPage.fillUsername(testUser.getUsername());

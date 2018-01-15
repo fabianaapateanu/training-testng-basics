@@ -7,9 +7,15 @@ import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import training.LoginUserHelper;
-import training.basic.HomePage;
-import training.basic.LoginPage;
+import training.basic.pageObject.HomePage;
+import training.basic.pageObject.LoginPage;
 
+/**
+ * TestNG can verify that an exception was raised by using the
+ * "expectedException = {ExceptionClass.class}" in the test annotation.
+ *
+ * @author fapateanu
+ */
 public class ExceptionTestExample {
 
     private static String username;

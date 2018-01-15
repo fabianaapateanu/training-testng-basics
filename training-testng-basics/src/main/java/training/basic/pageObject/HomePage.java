@@ -1,4 +1,4 @@
-package training.basic;
+package training.basic.pageObject;
 
 import common.CustomLogger;
 import common.helper.ActionHelper;
@@ -10,12 +10,17 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
+/**
+ * Home page which is the page displayed after user is logged in.
+ * Home page contains the user header menu elements, therefore it
+ * extends the UserHeaderMenu class.
+ *
+ * @author fapateanu
+ */
 public class HomePage extends UserHeaderMenu {
     @FindBy(className = "logged-in")
     private WebElement loggedInBodyElem;
 
-    //@FindBy(className = "codesearch-results")
     @FindBy(className = "repo-list")
     private WebElement respositorySearchResultsList;
 

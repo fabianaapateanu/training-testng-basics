@@ -6,14 +6,14 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import training.LoginUserHelper;
-import training.basic.HomePage;
-import training.basic.LoginPage;
+import training.basic.pageObject.HomePage;
+import training.basic.pageObject.LoginPage;
 
 /**
- * TestNG setup can be made with:
+ * TestNG setup can be made with annotations:
+ * BeforeClass, AfterClass, BeforeMethod, AfterMethod. BeforeGroups, AfterGroups
  *
- * @BeforeClass and @AfterClass
- * @BeforeMethod and @AfterMethod
+ * @author fapateanu
  */
 public class SetupOfTestNgExample {
     private static String username;

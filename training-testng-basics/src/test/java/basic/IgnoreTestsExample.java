@@ -6,9 +6,15 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import training.LoginUserHelper;
-import training.basic.HomePage;
-import training.basic.LoginPage;
+import training.basic.pageObject.HomePage;
+import training.basic.pageObject.LoginPage;
 
+/**
+ * TestNG can ignore tests by using the "enabled" attribute in the test annotation.
+ * By default this is set to true, meaning the test will be run and not ignored.
+ *
+ * @author fapateanu
+ */
 public class IgnoreTestsExample {
 
     private static String username;

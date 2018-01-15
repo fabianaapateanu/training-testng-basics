@@ -1,4 +1,4 @@
-package training.basic;
+package training.basic.pageObject;
 
 import common.CustomLogger;
 import common.helper.ActionHelper;
@@ -9,7 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
+/**
+ * Upper header menu which is available when user is logged in
+ *
+ * @author fapateanu
+ */
 public class UserHeaderMenu {
     @FindBy(className = "HeaderMenu")
     protected WebElement menuContainer;

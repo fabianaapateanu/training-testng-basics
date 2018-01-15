@@ -6,9 +6,14 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import training.LoginUserHelper;
-import training.basic.HomePage;
-import training.basic.LoginPage;
+import training.basic.pageObject.HomePage;
+import training.basic.pageObject.LoginPage;
 
+/**
+ * DataProvider can be used with primitive types: String, Boolean, Integer, etc.
+ *
+ * @author fapateanu
+ */
 public class DataProviderPrimitiveTests {
     private static String username;
     private static String password;

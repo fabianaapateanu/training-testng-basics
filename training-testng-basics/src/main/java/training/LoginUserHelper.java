@@ -1,5 +1,8 @@
 package training;
 
+/**
+ * Initial helper class for reading the login test data.
+ */
 public class LoginUserHelper {
 
     public static String readValidUsername() {

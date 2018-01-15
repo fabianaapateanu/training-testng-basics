@@ -1,6 +1,5 @@
-package training.basic;
+package training.basic.pageObject;
 
-import common.CustomDriver;
 import common.CustomLogger;
 import common.helper.ActionHelper;
 import common.helper.WaitHelper;
@@ -10,6 +9,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * Login page which is the first page opened by the driver
+ *
+ * @author fapateanu
+ */
 public class LoginPage {
 
     @FindBy(id = "login_field")
