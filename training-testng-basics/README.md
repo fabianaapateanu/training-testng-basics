@@ -20,7 +20,7 @@ Basic TestNG examples with WebDriver and Chrome browser.
 # Running the Demos
 1. You will need to created yourself a valid GitHub account
 2. For login tests and purposes you will need to add your login information:
-    * `LoginUserHelper.java` in methods `readValidUsername()`, `readValidPassword`
+    * `LoginUserHelper.java` in methods `readValidUsername()`, `readValidPassword()`
 
 # Demo 1
 Example of most used annotations in TestNG for creating the test setup.
@@ -73,7 +73,7 @@ Running the tests with TestNG xml suite files
 1. Test suite based on selected test classes: `runSuite.xml`
 2. Test suite based on selected groups from within a package: `runGroups.xml`
 
-# Practice, practice! - TestNG basics
+# Practice, practice :exclamation: TestNG basics :sweat:
 1. In `DataProviderObjectTests.java` add a new data provider method and perform a valid login test
     1. Create a new data provider method "loginValidProvider" for creating valid login data
     2. Create a new test data method which is using the valid data provider from point 1.1
