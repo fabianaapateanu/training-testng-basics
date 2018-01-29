@@ -47,7 +47,7 @@ public class DataProviderObjectTests {
         myDriver.closeDriver();
     }
 
-    @Test(dataProvider = "loginInvalidProvider")
+    @Test(dataProvider = "invalid_user_data")
     public void loginWithInvalidUser(User testUser) {
         LoginPage loginPage = new LoginPage(myDriver.getDriver());
         loginPage.fillUsername(testUser.getUsername());

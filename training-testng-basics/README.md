@@ -65,7 +65,7 @@ Data provider with primitive types and with custom object type.
     2. A data provider which returns two user objects (invalid login information)
         * `@DataProvider(name = "invalid_user_data")`
     3. A login test method which uses the data provider:
-        * `@Test(dataProvider = "loginInvalidProvider")`
+        * ` @Test(dataProvider = "invalid_user_data")`
     
 ## Demo 4
 Running the tests with TestNG xml suite files
