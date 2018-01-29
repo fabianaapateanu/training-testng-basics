@@ -1,13 +1,13 @@
-# training-testng-basic
+# training-testng-basic 
 Basic TestNG examples with WebDriver and Chrome browser.
 
-# Project resources
+## Project resources
 * src/main/resources/drivers/mac - chromedriver v. 2.35
 * src/main/resources/drivers/mac - geckodriver v. 0.19.1
 * src/main/resources/drivers/windows - chromedriver.exe v.2.35
 * src/main/resources/drivers/windows - geckodriver.exe 0.19.1
 
-# Project structure
+## Project structure
 * src/main/java/common - webdriver custom driver and helpers
 * src/main/java/training/basic - page object classes and dataprovider object class for the demos
     * /dataprovider
@@ -17,12 +17,12 @@ Basic TestNG examples with WebDriver and Chrome browser.
     * /basic - test classes for basic examples
     * /dataprovider - test classes for dataprovider examples
     
-# Running the Demos
+## Running the Demos
 1. You will need to create yourself a valid GitHub account
 2. For login tests and purposes you will need to add your login information:
     * `LoginUserHelper.java` in methods `readValidUsername()`, `readValidPassword()`
 
-# Demo 1
+## Demo 1
 Example of most used annotations in TestNG for creating the test setup.
 
 1. In test class `SetupOfTestNgExample.java` we have an example for each annotation:
@@ -35,7 +35,7 @@ Example of most used annotations in TestNG for creating the test setup.
         1. In before we always start & initialize the driver
         2. In after we always close the driver 
         
-# Demo 2
+## Demo 2
 Example of test methods which will be ignored and of test methods which are expecting exceptions.
 
 1. In test class `IgnoreTestsExample.java`:
@@ -49,7 +49,7 @@ Example of test methods which will be ignored and of test methods which are expe
         * `@Test(expectedExceptions = {NoSuchElementException.class})`
     3. Running the test class should run the test method which will pass because the exception will be raised.
 
-# Demo 3
+## Demo 3
 Data provider with primitive types and with custom object type.
 
 1. In test class `DataProviderPrimitiveTests.java`:
@@ -67,13 +67,13 @@ Data provider with primitive types and with custom object type.
     3. A login test method which uses the data provider:
         * `@Test(dataProvider = "loginInvalidProvider")`
     
-# Demo 4
+## Demo 4
 Running the tests with TestNG xml suite files
 
 1. Test suite based on selected test classes: `runSuite.xml`
 2. Test suite based on selected groups from within a package: `runGroups.xml`
 
-# Practice, practice :exclamation: TestNG basics :sweat:
+## Practice, practice :exclamation: TestNG basics :sweat:
 1. In `DataProviderObjectTests.java` add a new data provider method and perform a valid login test
     1. Create a new data provider method `loginValidProvider()` for creating valid login data
     2. Create a new test data method which is using the valid data provider from point 1.1
