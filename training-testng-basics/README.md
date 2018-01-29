@@ -18,7 +18,7 @@ Basic TestNG examples with WebDriver and Chrome browser.
     * /dataprovider - test classes for dataprovider examples
     
 # Running the Demos
-1. You will need to created yourself a valid GitHub account
+1. You will need to create yourself a valid GitHub account
 2. For login tests and purposes you will need to add your login information:
     * `LoginUserHelper.java` in methods `readValidUsername()`, `readValidPassword()`
 
