@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import training.basic.dataprovider.User;
 import training.basic.pageObject.LoginPage;
+import training.basic.pageObject.HomePage;
 
 /**
  * DataProvider can be used with your own defined objects.
@@ -23,6 +24,13 @@ public class DataProviderObjectTests {
         return new Object[]{new User("yeseniaworld@gmail.com", "test12345"),
                 new User("invalidUser@yahoo", "invalidPass")};
     }
+
+    @DataProvider(name = "valid_user_data")
+    public Object[] loginValidProvider() {
+        return new Object[]{new User("bercean.maria@gmail.com", "test123"),
+                new User("bercean.maria@gmail.com", "test123")};
+    }
+
 
     @BeforeClass()
     public static void runBeforeClassInit() {
@@ -55,4 +63,12 @@ public class DataProviderObjectTests {
         loginPage.clickLogin();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Some failure log");
     }
+
+    @Test(dataProvider = "valid_user_data")
+    public void loginWithValidUser(User testUser) {
+        LoginPage loginPage = new LoginPage(myDriver.getDriver());
+        HomePage homePage = loginPage.performLogin(testUser.getUsername(), testUser.getPassword());
+        Assert.assertTrue(homePage.isUserMenuButtonGroupVisible(), "Login successfully");
+    }
+
 }
