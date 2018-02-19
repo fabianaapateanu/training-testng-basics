@@ -27,6 +27,9 @@ public class HomePage extends UserHeaderMenu {
     @FindBy(className = "blankslate")
     private WebElement emptySearchResults;
 
+    @FindBy(className = "select-menu-button" )
+    private WebElement sortButton;
+
     protected ActionHelper driverActionHelper;
     protected WaitHelper driverWaitHelper;
 
@@ -59,5 +62,10 @@ public class HomePage extends UserHeaderMenu {
     public boolean isEmptyResultDisplayed() {
         log.info("Is empty search result displayed");
         return emptySearchResults.isDisplayed();
+    }
+
+    public boolean isSortButtonDisplayed()  {
+        log.info("Is Sort button displayed");
+        return sortButton.isDisplayed();
     }
 }

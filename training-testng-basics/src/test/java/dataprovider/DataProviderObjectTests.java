@@ -24,6 +24,13 @@ public class DataProviderObjectTests {
                 new User("invalidUser@yahoo", "invalidPass")};
     }
 
+    @DataProvider(name = "valid_user_data")
+    public Object[] loginValidProvider() {
+        return new Object[] {new User("andradascrobota@yahoo.com", "Andra1111!")
+        };
+    }
+
+
     @BeforeClass()
     public static void runBeforeClassInit() {
         LOG = CustomLogger.getInstance(DataProviderObjectTests.class).getLogger();
@@ -54,5 +61,14 @@ public class DataProviderObjectTests {
         loginPage.fillPassword(testUser.getPassword());
         loginPage.clickLogin();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Some failure log");
+    }
+
+    @Test(dataProvider = "valid_user_data")
+    public void loginWithValidUser(User testUser){
+        LoginPage loginPage = new LoginPage(myDriver.getDriver());
+        loginPage.fillUsername(testUser.getUsername());
+        loginPage.fillPassword(testUser.getPassword());
+        loginPage.clickLogin();
+        Assert.assertTrue(!loginPage.isErrorMessageDisplayed(), "No failure log");
     }
 }
