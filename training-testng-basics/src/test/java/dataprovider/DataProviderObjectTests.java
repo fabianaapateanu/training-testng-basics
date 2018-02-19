@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import training.basic.dataprovider.User;
+import training.basic.pageObject.HomePage;
 import training.basic.pageObject.LoginPage;
 
 /**
@@ -24,7 +25,13 @@ public class DataProviderObjectTests {
                 new User("invalidUser@yahoo", "invalidPass")};
     }
 
-    @BeforeClass()
+    @DataProvider(name = "valid_user_data")
+    public Object[] loginValidProvider() {
+        return new Object[]{new User("rarestomos@gmail.com", "minimopt8"),
+        new User("rarestomos@gmail.com", "minimopt*")};
+    }
+
+    @BeforeClass(groups = {"positive_tests", "negative_tests"})
     public static void runBeforeClassInit() {
         LOG = CustomLogger.getInstance(DataProviderObjectTests.class).getLogger();
         LOG.info("Running setup before class test methods initialization");
@@ -35,7 +42,7 @@ public class DataProviderObjectTests {
         LOG.info("Running teardown after class test methods run finished");
     }
 
-    @BeforeMethod()
+    @BeforeMethod(groups = {"positive_tests", "negative_tests"})
     public void runBeforeEachTestMethod() {
         LOG.info("Running setup before each test method");
         myDriver = CustomDriver.getInstance();
@@ -47,12 +54,19 @@ public class DataProviderObjectTests {
         myDriver.closeDriver();
     }
 
-    @Test(dataProvider = "invalid_user_data")
+    @Test(groups = "negative_tests", dataProvider = "invalid_user_data")
     public void loginWithInvalidUser(User testUser) {
         LoginPage loginPage = new LoginPage(myDriver.getDriver());
         loginPage.fillUsername(testUser.getUsername());
         loginPage.fillPassword(testUser.getPassword());
         loginPage.clickLogin();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Some failure log");
+    }
+
+    @Test(groups = "positive_tests", dataProvider = "valid_user_data")
+    public void loginWithValidUser(User testUser) {
+        LoginPage loginPage = new LoginPage(myDriver.getDriver());
+        HomePage homePage = loginPage.performLogin(testUser.getUsername(), testUser.getPassword());
+        Assert.assertTrue(homePage.isUserMenuButtonGroupVisible(), "Homepage was loaded with success");
     }
 }
