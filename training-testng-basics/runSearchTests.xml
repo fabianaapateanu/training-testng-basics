@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!--  parallel="false" configfailurepolicy="continue" -->
+<suite name="Search Test Suite">
+    <test name="First Test Suite">
+        <groups>
+            <run>
+                <include name="positive_tests"/>
+            </run>
+        </groups>
+        <classes>
+        <class name="dataprovider.DataProviderSearchTests"></class>
+        </classes>
+    </test>
+</suite>
