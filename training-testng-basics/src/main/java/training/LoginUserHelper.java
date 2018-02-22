@@ -6,7 +6,7 @@ package training;
 public class LoginUserHelper {
 
     public static String readValidUsername() {
-        return "yeseniaworld@gmail.com";
+        return "cosminTestcosmin";
     }
 
     public static String readInvalidUsername() {
@@ -14,7 +14,7 @@ public class LoginUserHelper {
     }
 
     public static String readValidPassword() {
-        return "test123456";
+        return "Cosmin160692";
     }
 
     public static String readInvalidPassword() {

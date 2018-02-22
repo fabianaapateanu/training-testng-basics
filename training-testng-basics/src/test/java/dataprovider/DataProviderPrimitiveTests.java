@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import training.LoginUserHelper;
+import training.basic.dataprovider.Search;
 import training.basic.pageObject.HomePage;
 import training.basic.pageObject.LoginPage;
 
@@ -32,6 +33,12 @@ public class DataProviderPrimitiveTests {
     public static Object[] invalidSearchData() {
         Object[] data = new Object[]{"poooooooop", "loooooooop", "zooooooooz"};
         return data;
+    }
+
+    @DataProvider(name = "search_text_provider")
+    public static Object[] searchText() {
+        return new Object[]{new Search("text"),
+                new Search("testng")};
     }
 
     @BeforeClass(groups = {"positive_tests", "negative_tests"})
@@ -65,6 +72,14 @@ public class DataProviderPrimitiveTests {
     public void searchWithMultipleResults(String searchQuery) {
         Assert.assertTrue(homePage.isSearchAreaDisplayed(), "The search area is not displayed");
         homePage.performSearch(searchQuery);
+
+        Assert.assertTrue(homePage.isRepositorySearchResultListDisplayed(), "The search action did not return multiple results");
+    }
+
+    @Test(groups = "positive_tests", dataProvider = "search_text_provider")
+    public void searchText(Search mySearchObject) {
+        Assert.assertTrue(homePage.isSearchAreaDisplayed(), "The search area is not displayed");
+        homePage.performSearch(mySearchObject.getSearchText());
 
         Assert.assertTrue(homePage.isRepositorySearchResultListDisplayed(), "The search action did not return multiple results");
     }
