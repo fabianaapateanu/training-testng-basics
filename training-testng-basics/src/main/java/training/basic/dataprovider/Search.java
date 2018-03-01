@@ -2,13 +2,13 @@ package training.basic.dataprovider;
 
 public class Search {
 
-    private Object[] searchString;
+    private String[] searchString;
 
-    public Search(){
-        this.searchString = new Object[]{"test", "provider", "requests"};
+    public Search(String[] searchStringArray){
+        this.searchString = searchStringArray;
     }
 
-    public Object[] getSearchString() {
+    public String[] getSearchString() {
         return searchString;
     }
 }

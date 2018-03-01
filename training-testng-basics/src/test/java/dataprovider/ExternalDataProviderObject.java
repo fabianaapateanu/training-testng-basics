@@ -22,7 +22,8 @@ public class ExternalDataProviderObject {
 
     @DataProvider(name = "valid_search_data")
     public static Object[] validSearchData() {
-        Search data = new Search();
+        String[] searchString = new String[]{"test", "provider", "requests"};
+        Search data = new Search(searchString);
         return data.getSearchString();
     }
 
