@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import training.basic.dataprovider.User;
+import training.basic.pageObject.HomePage;
 import training.basic.pageObject.LoginPage;
 
 /**
@@ -22,6 +23,11 @@ public class DataProviderObjectTests {
     public Object[] loginInvalidProvider() {
         return new Object[]{new User("yeseniaworld@gmail.com", "test12345"),
                 new User("invalidUser@yahoo", "invalidPass")};
+    }
+
+    @DataProvider(name = "valid_user_data")
+    public Object[] loginValidProvide() {
+        return new Object[]{new User("catiusha333@yahoo.com", "Smotocel_1")};
     }
 
     @BeforeClass()
@@ -54,5 +60,12 @@ public class DataProviderObjectTests {
         loginPage.fillPassword(testUser.getPassword());
         loginPage.clickLogin();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed(), "Some failure log");
+    }
+
+    @Test(dataProvider = "valid_user_data")
+    public void loginWithValidUser(User user){
+        LoginPage loginPage = new LoginPage(myDriver.getDriver());
+        HomePage homePage = loginPage.performLogin(user.getUsername(), user.getPassword());
+        Assert.assertTrue(homePage.isSearchAreaDisplayed(), "Home page is not loaded");
     }
 }
